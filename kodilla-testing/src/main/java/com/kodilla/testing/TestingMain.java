@@ -1,7 +1,5 @@
 package com.kodilla.testing;
 
-import com.kodilla.testing.user.SimpleUser;
-import com.kodilla.testing.calculator.Calculator;
 
 public class TestingMain {
     public static void main(String[] args) {
@@ -32,6 +30,10 @@ public class TestingMain {
 //        } else {
 //            System.out.println("Error!");
 //        }
+
+//        Triangle triangle = new Triangle(5,5,5);
+//        System.out.println(triangle.getField());
+
 
 
 
