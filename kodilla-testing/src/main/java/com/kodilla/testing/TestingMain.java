@@ -35,7 +35,7 @@ public class TestingMain {
 //        System.out.println(triangle.getField());
 
 
-
+        System.out.println(0/0);
 
     }
 }
