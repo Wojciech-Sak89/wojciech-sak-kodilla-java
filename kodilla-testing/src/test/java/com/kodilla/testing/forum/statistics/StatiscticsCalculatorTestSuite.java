@@ -201,7 +201,7 @@ public class StatiscticsCalculatorTestSuite {
     }
 
     @Test
-    public void ZeroUsers_CalculateAdvStatistics() {
+    public void testZeroUsers_CalculateAdvStatistics() {
         //Given
         Statistics statisticsMock = mock(Statistics.class);
 
