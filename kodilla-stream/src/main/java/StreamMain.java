@@ -1,4 +1,5 @@
 import com.kodilla.stream.beautifier.PoemBeautifier;
+import com.kodilla.stream.iterate.NumbersGenerator;
 
 public class StreamMain {
     public static void main(String[] args) {
@@ -34,5 +35,8 @@ public class StreamMain {
         poemBeautifier.beautify("alfabetINeed!!!", (a) -> "ABC " + a + " ABC");
         poemBeautifier.beautify("CAPS TEXT", (a) -> a.toLowerCase());
         poemBeautifier.beautify("I DON'T NEED ANY \"A\" LETTERS!!! I NEED \"B\" INSTEAD", (a) -> a.replaceAll("A", "B"));
+
+        System.out.println("Using Stream to generate even numbers from 1 to 20");
+        NumbersGenerator.generateEven(20);
     }
 }
