@@ -3,9 +3,6 @@ package com.kodilla.stream.array;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.OptionalDouble;
-import java.util.stream.IntStream;
-
 public class ArrayOperationsTestSuite {
     @Test
     public void testGetAverage() {
@@ -24,18 +21,8 @@ public class ArrayOperationsTestSuite {
         someNumbers[9]  = 1580;
 
         //When
-        ArrayOperations arrayOperations = numbers -> {
-            IntStream.range(0, numbers.length)
-                    .map(n -> numbers[n])
-                    .forEach(System.out::println);
 
-            OptionalDouble avg = IntStream.range(0, numbers.length)
-                    .map(n -> numbers[n])
-                    .average();
-
-            return avg.getAsDouble();
-        };
-        double myDoubleAvg = arrayOperations.getAverage(someNumbers);
+        double myDoubleAvg = ArrayOperations.getAverage(someNumbers);
 
         //Then
         Assert.assertEquals(2285.2, myDoubleAvg, 0.001);
