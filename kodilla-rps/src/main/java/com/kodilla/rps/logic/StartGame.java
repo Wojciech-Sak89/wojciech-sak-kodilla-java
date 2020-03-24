@@ -8,65 +8,49 @@ public class StartGame {
         Scanner s = new Scanner(System.in);
         boolean end = false;
 
-        String name;
-        int roundsToWin;
+        Player newPlayer;
+        int roundsToWin = 0;
         int roundsWonPlayer = 0;
         int roundsWonCPU = 0;
 
         String choicePlayer;
         int choiceCPU;
-        String choiceCPUtext;
+        String choiceCPUText;
+        String roundWinner;
+
         Random random = new Random();
+        NewGame newGame = new NewGame();
 
         printInstructions();
         System.out.println("Please enter your name: ");
-        name = s.nextLine();
-        System.out.println("Enter number of rounds needed to win the game:");
-        roundsToWin = s.nextInt();
+        newPlayer = new Player(s.nextLine());
+        roundsToWin = roundsToWin(s);
 
-
-        while(!end) {
+        while (!end) {
             System.out.println("Make a choice (1, 2, 3, x, n):");
-            //  choices
             choicePlayer = s.next();
             if (choicePlayer.equals("x")) { break; }
-            if (choicePlayer.equals("n")) { start(); break; }
+            if (choicePlayer.equals("n")) { newGame.start(); break; }
 
             choiceCPU = random.nextInt(3) + 1;
-            choiceCPUtext = Integer.toString(choiceCPU);
-            System.out.println(name + ": " + choiceName(choicePlayer) + "   ---   CPU: " + choiceName(choiceCPUtext));
+            choiceCPUText = Integer.toString(choiceCPU);
+            System.out.println(newPlayer.getName() + ": " + choiceName(choicePlayer) + "   ---   CPU: " + choiceName(choiceCPUText));
 
-            // find winner of that round
-                //PLAYER WINS
-            if((choicePlayer.equals("1") && choiceCPUtext.equals("3")) || (choicePlayer.equals("3") && choiceCPUtext.equals("2")) || (choicePlayer.equals("2") && choiceCPUtext.equals("1"))) {
-                System.out.println(name + " wins this round!");
-                roundsWonPlayer++;
-            }
-                // CPU WINS
-            if((choicePlayer.equals("3") && choiceCPUtext.equals("1")) || (choicePlayer.equals("2") && choiceCPUtext.equals("3")) || (choicePlayer.equals("1") && choiceCPUtext.equals("2"))) {
-                System.out.println("CPU wins this round!");
-                roundsWonCPU++;
-            }
-                // DRAW
-            if(choicePlayer.equals(choiceCPUtext)) {
-                System.out.println("You have chosen same as CPU! (or CPU same as you...)");
-                System.out.println("Current round: DRAW");
-            }
+            roundWinner = whoWinsTheRound(choicePlayer, choiceCPUText, newPlayer);
+            if (roundWinner.equals("playerWins")) { roundsWonPlayer++; }
+            if (roundWinner.equals("CPUWins")) { roundsWonCPU++; }
 
-            // current result
-            System.out.println("Current result: " + name + ": " + roundsWonPlayer + "\tCPU: " + roundsWonCPU);
+            System.out.println("Current result: " + newPlayer.getName() + ": " + roundsWonPlayer + "\tCPU: " + roundsWonCPU);
 
-            // to end
             if (roundsWonPlayer == roundsToWin || roundsWonCPU == roundsToWin) {
-                // final result
-                System.out.println("Final result: " + name + ": " + roundsWonPlayer + "\tCPU: " + roundsWonCPU);
+                System.out.println("Final result: " + newPlayer.getName() + ": " + roundsWonPlayer + "\tCPU: " + roundsWonCPU);
                 if (roundsWonPlayer > roundsWonCPU) {
-                    System.out.println(name + " wins! Congratulations!");
+                    System.out.println(newPlayer.getName() + " wins! Congratulations!");
                 } else {
-                    System.out.println("CPU wins! Maybe next time " + name);
+                    System.out.println("CPU wins! Maybe next time " + newPlayer.getName());
                 }
-                // new game / quit game
-                endGame();
+
+                endGameOrNewGame(newGame);
                 end = true;
             }
         }
@@ -86,6 +70,23 @@ public class StartGame {
                 "\nAfter you press 1-3 CPU will respond. Don't worry, \nit doesn't know what you have chosen, like in real game! :-)\n");
     }
 
+    public int roundsToWin(Scanner scanner) {
+        int roundsToWin = 0;
+        boolean hasNextInt = false;
+        while (!hasNextInt) {
+            System.out.println("Enter number of rounds needed to win the game:");
+            hasNextInt = scanner.hasNextInt();
+            if (hasNextInt) {
+                roundsToWin = scanner.nextInt();
+                return roundsToWin;
+            } else {
+                System.out.println("Invalid number of rounds! Please be sure to enter an integer.");
+                scanner.nextLine();
+            }
+        }
+        return -1;
+    }
+
     public String choiceName(String choice) {
         switch (choice) {
             case "1":
@@ -100,18 +101,41 @@ public class StartGame {
                 return "x";
 
         }
-        return "invalid choice";
+        return "Invalid choice! Please enter one of these: 1, 2, 3, x, n";
     }
 
-    public void endGame() {
+    public String whoWinsTheRound(String inputPlayer, String inputCPU, Player player) {
+        //PLAYER WINS
+        if ((inputPlayer.equals("1") && inputCPU.equals("3")) || (inputPlayer.equals("3") && inputCPU.equals("2")) || (inputPlayer.equals("2") && inputCPU.equals("1"))) {
+            System.out.println(player.getName() + " wins this round!");
+            return "playerWins";
+        }
+        // CPU WINS
+        if ((inputPlayer.equals("3") && inputCPU.equals("1")) || (inputPlayer.equals("2") && inputCPU.equals("3")) || (inputPlayer.equals("1") && inputCPU.equals("2"))) {
+            System.out.println("CPU wins this round!");
+            return "CPUWins";
+        }
+        // DRAW
+        if (inputPlayer.equals(inputCPU)) {
+            System.out.println("You have chosen same as CPU! (or CPU same as you...)");
+            System.out.println("Current round: DRAW");
+            return "draw";
+        }
+        return "Error";
+    }
+
+    public void endGameOrNewGame(NewGame newGame) {
         String finalChoice;
         Scanner s = new Scanner(System.in);
         while (true) {
             System.out.println("Press n to start new game. Press x to quit.");
             finalChoice = s.nextLine();
-            if (finalChoice.equals("x")) { break; } else
-            if (finalChoice.equals("n")) { start(); break; } else
-            {
+            if (finalChoice.equals("x")) {
+                break;
+            } else if (finalChoice.equals("n")) {
+                newGame.start();
+                break;
+            } else {
                 System.out.println("Invalid input!");
             }
         }
