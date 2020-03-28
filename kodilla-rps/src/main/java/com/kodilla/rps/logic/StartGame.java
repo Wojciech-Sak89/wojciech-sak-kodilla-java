@@ -56,9 +56,14 @@ public class StartGame {
         }
     }
 
+    public void establishGame() {
+
+    }
+
     public void printInstructions() {
-        System.out.println("ROCK PAPER SCISSORS - THE GAME\n" +
-                "Hello! Here you have an opportunity to play a classic game called ROCK PAPER SCISSORS!\n" +
+        System.out.println("ROCK PAPER SCISSORS SPOCK LIZARD - THE GAME\n" +
+                "Hello! Here you have an opportunity to play a modified version of classic game known as ROCK PAPER SCISSORS!\n" +
+                "\n it add to the game" +
                 "\nHOW TO PLAY?\n" +
                 "After choosing number of rounds needed to win the game press:\n" +
                 "1 - to play ROCK\n" +
