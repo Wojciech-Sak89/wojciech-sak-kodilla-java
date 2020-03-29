@@ -11,7 +11,7 @@ import static org.mockito.Mockito.*;
 
 public class BookDirectoryTestSuite {
     @Test
-    public void testListBooksWithConditionsReturnList() {
+    public void testListBooksWithConditionReturnList() {
         // Given
         LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
         BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
@@ -79,7 +79,7 @@ public class BookDirectoryTestSuite {
     }
 
     @Test
-    public void testListBooksInHandsOf_UserWithNoOrders() {
+    public void testListBooksInHandsOfUserWith_NoOrders() {
         // Given
         LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
         BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
@@ -97,15 +97,15 @@ public class BookDirectoryTestSuite {
     }
 
     @Test
-    public void testListBooksInHandsOf_UserWithOneOrder() {
+    public void testListBooksInHandsOfUserWith_OneOrder() {
         // Given
         LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
         BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
-        List<Book> zeroOrderedBooks = generateListOfNBooks(1);
+        List<Book> oneOrderedBook = generateListOfNBooks(1);
         LibraryUser leonProfessional = new LibraryUser("Léon", "Montana", "19940914");
-        leonProfessional.setOrderedBooks(zeroOrderedBooks);
+        leonProfessional.setOrderedBooks(oneOrderedBook);
         when(libraryDatabaseMock.listBooksInHandsOf(leonProfessional))
-                .thenReturn(zeroOrderedBooks);
+                .thenReturn(oneOrderedBook);
 
         // When
         List<Book> theListOfZeroBooks = bookLibrary.listBooksInHandsOf(leonProfessional);
@@ -119,11 +119,11 @@ public class BookDirectoryTestSuite {
         // Given
         LibraryDatabase libraryDatabaseMock = mock(LibraryDatabase.class);
         BookLibrary bookLibrary = new BookLibrary(libraryDatabaseMock);
-        List<Book> zeroOrderedBooks = generateListOfNBooks(5);
+        List<Book> fiveOrderedBooks = generateListOfNBooks(5);
         LibraryUser leonProfessional = new LibraryUser("Léon", "Montana", "19940914");
-        leonProfessional.setOrderedBooks(zeroOrderedBooks);
+        leonProfessional.setOrderedBooks(fiveOrderedBooks);
         when(libraryDatabaseMock.listBooksInHandsOf(leonProfessional))
-                .thenReturn(zeroOrderedBooks);
+                .thenReturn(fiveOrderedBooks);
 
         // When
         List<Book> theListOfZeroBooks = bookLibrary.listBooksInHandsOf(leonProfessional);

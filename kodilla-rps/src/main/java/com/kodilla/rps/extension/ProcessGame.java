@@ -14,7 +14,13 @@ public class ProcessGame {
             hasNextInt = scanner.hasNextInt();
             if (hasNextInt) {
                 roundsToWin = scanner.nextInt();
-                return roundsToWin;
+                if(roundsToWin > 0) {
+                    return roundsToWin;
+                } else {
+                    System.out.println("Invalid number of rounds! It has to be greater than zero!");
+                    scanner.nextLine();
+                    hasNextInt = false;
+                }
             } else {
                 System.out.println("Invalid number of rounds! Please be sure to enter an integer.");
                 scanner.nextLine();
@@ -94,7 +100,14 @@ public class ProcessGame {
     }
 
     public static String whoWinsTheRound(String inputPlayer, String inputCPU, Player player) {
-        //PLAYER WINS
+        // DRAW
+        if (inputPlayer.equals(inputCPU)) {
+            System.out.println("You have chosen same as CPU! (or CPU same as you...)");
+            System.out.println("Current round: DRAW");
+            return "draw";
+        }
+
+        //PLAYER WINS or CPU WINS
         if ((inputPlayer.equals("ROCK") && ((inputCPU.equals("SCISSORS")) || (inputCPU.equals("LIZARD"))))
                 || (inputPlayer.equals("SCISSORS") && ((inputCPU.equals("PAPER")) || (inputCPU.equals("LIZARD"))))
                 || (inputPlayer.equals("PAPER") && ((inputCPU.equals("ROCK")) || (inputCPU.equals("SPOCK"))))
@@ -102,23 +115,9 @@ public class ProcessGame {
                 || (inputPlayer.equals("LIZARD") && ((inputCPU.equals("PAPER")) || (inputCPU.equals("SPOCK"))))) {
             System.out.println(player.getName() + " wins this round!");
             return "playerWins";
-        }
-        // CPU WINS
-        if ((inputCPU.equals("ROCK") && ((inputPlayer.equals("SCISSORS")) || (inputPlayer.equals("LIZARD"))))
-                || (inputCPU.equals("SCISSORS") && ((inputPlayer.equals("PAPER")) || (inputPlayer.equals("LIZARD"))))
-                || (inputCPU.equals("PAPER") && ((inputPlayer.equals("ROCK")) || (inputPlayer.equals("SPOCK"))))
-                || (inputCPU.equals("SPOCK") && ((inputPlayer.equals("SCISSORS")) || (inputPlayer.equals("ROCK"))))
-                || (inputCPU.equals("LIZARD") && ((inputPlayer.equals("PAPER")) || (inputPlayer.equals("SPOCK"))))) {
-            System.out.println("CPU wins this round!");
+        } else {
             return "CPUWins";
         }
-        // DRAW
-        if (inputPlayer.equals(inputCPU)) {
-            System.out.println("You have chosen same as CPU! (or CPU same as you...)");
-            System.out.println("Current round: DRAW");
-            return "draw";
-        }
-        return "Error";
     }
 
     public static String cpuSetResponse(String inputPlayer, int option) {

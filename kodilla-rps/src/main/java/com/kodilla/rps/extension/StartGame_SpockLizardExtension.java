@@ -68,7 +68,7 @@ public class StartGame_SpockLizardExtension {
                 System.out.println("\nFinal result: \n" + newPlayer.getName() + ": " + roundsWonPlayer + "\tCPU: " + roundsWonCPU);
                 if (roundsWonPlayer > roundsWonCPU) {
                     bannersASCII.playerWins();
-                    System.out.println(newPlayer.getName() + ",  you have won! Congratulations!");
+                    System.out.println(newPlayer.getName() + ", you have won! Congratulations!");
                 } else {
                     bannersASCII.cpuWins();
                     System.out.println("Maybe next time " + newPlayer.getName());
