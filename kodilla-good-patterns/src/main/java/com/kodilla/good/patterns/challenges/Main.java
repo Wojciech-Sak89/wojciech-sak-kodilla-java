@@ -57,7 +57,7 @@ public class Main {
         polishAirports.printCitiesWithConnectionTo("Gdańsk");
 
         System.out.println("\n***************\n");
-        polishAirports.printConnectingCities("Warszawa", "łódź");
+        polishAirports.printConnectingCities("Warszawa", "Łódź");
 
     }
 

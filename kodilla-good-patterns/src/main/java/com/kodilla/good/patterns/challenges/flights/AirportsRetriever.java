@@ -8,7 +8,7 @@ public class AirportsRetriever {
     private final City poznan = new City("Poznań");
     private final City wroclaw = new City("Wrocław");
     private final City krakow = new City("Kraków");
-    private final City lodz = new City("łódź");
+    private final City lodz = new City("Łódź");
 
     private final DepartureCity departureGda = new DepartureCity(gdansk);
     private final DepartureCity departureWar = new DepartureCity(warszawa);
@@ -18,7 +18,7 @@ public class AirportsRetriever {
     private final DepartureCity departureLod = new DepartureCity(lodz);
 
     public HashSet<DepartureCity> retrieve() {
-        HashSet<DepartureCity> allCitiesWithAirports = new HashSet<>();
+        HashSet<DepartureCity> citiesWithAirports = new HashSet<>();
         departureGda.addDestCity(departureWar);
         departureGda.addDestCity(departurePoz);
         departureGda.addDestCity(departureWro);
@@ -43,13 +43,13 @@ public class AirportsRetriever {
         departureLod.addDestCity(departureWar);
         departureLod.addDestCity(departurePoz);
 
-        allCitiesWithAirports.add(departureGda);
-        allCitiesWithAirports.add(departureWar);
-        allCitiesWithAirports.add(departurePoz);
-        allCitiesWithAirports.add(departureWro);
-        allCitiesWithAirports.add(departureKra);
-        allCitiesWithAirports.add(departureLod);
+        citiesWithAirports.add(departureGda);
+        citiesWithAirports.add(departureWar);
+        citiesWithAirports.add(departurePoz);
+        citiesWithAirports.add(departureWro);
+        citiesWithAirports.add(departureKra);
+        citiesWithAirports.add(departureLod);
 
-        return allCitiesWithAirports;
+        return citiesWithAirports;
     }
 }
