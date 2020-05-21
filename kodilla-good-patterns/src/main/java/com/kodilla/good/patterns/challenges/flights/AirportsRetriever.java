@@ -8,7 +8,7 @@ public class AirportsRetriever {
     private final City poznan = new City("Poznań");
     private final City wroclaw = new City("Wrocław");
     private final City krakow = new City("Kraków");
-    private final City lodz = new City("Łódź");
+    private final City lodz = new City("łódź");
 
     private final DepartureCity departureGda = new DepartureCity(gdansk);
     private final DepartureCity departureWar = new DepartureCity(warszawa);
